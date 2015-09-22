@@ -627,6 +627,38 @@
  <resources/>
  <connections>
   <connection>
+   <sender>save_button</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>save_tex()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1020</x>
+     <y>801</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>549</x>
+     <y>439</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>create_button</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>create_pdf()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>870</x>
+     <y>801</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>549</x>
+     <y>439</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
    <sender>actionFaltmarken</sender>
    <signal>triggered(bool)</signal>
    <receiver>faltmarken_checkbox</receiver>
@@ -803,4 +835,8 @@
    </hints>
   </connection>
  </connections>
+ <slots>
+  <slot>create_pdf()</slot>
+  <slot>save_tex()</slot>
+ </slots>
 </ui>

@@ -264,6 +264,8 @@ class Ui_MainWindow(object):
         self.greeting_label.setBuddy(self.greeting_line)
 
         self.retranslateUi(MainWindow)
+        self.save_button.clicked.connect(MainWindow.save_tex)
+        self.create_button.clicked.connect(MainWindow.create_pdf)
         self.actionFaltmarken.triggered['bool'].connect(self.faltmarken_checkbox.toggle)
         self.actionFenstermarken.triggered['bool'].connect(self.fenstermarken_checkbox.toggle)
         self.actionLochermarke.triggered['bool'].connect(self.lochermarke_checkbox.toggle)
