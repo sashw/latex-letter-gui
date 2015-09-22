@@ -2,7 +2,7 @@ import sys, os
 from collections import OrderedDict
 from tempfile import TemporaryFile as tmp_file
 
-__version__ = 0.1
+__version__ = 0.2
 
 try:
     from latex import build_pdf, LatexBuildError
@@ -25,6 +25,27 @@ f.write(b"\end{document}")
 f.seek(0)
 print(f.read().decode('utf-8'))
 
+
+
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import QGridLayout, QLabel, QLineEdit
+from PyQt5.QtWidgets import QTextEdit, QWidget, QDialog, QApplication, QMainWindow
+# example: https://misperious.wordpress.com/2014/08/17/python-pyqt5-example/
+#TODO: check what really needs to be imported
+
+from letter_ui import Ui_MainWindow as gui
+
+class MainWindow(QMainWindow, gui):
+    def __init__(self, parent=None):
+        #QMainWindow.__init__(self, parent)
+        super(MainWindow, self).__init__(parent)
+        self.setupUi(self)
+
+app = QApplication(sys.argv)
+w = MainWindow()
+w.show()
+sys.exit(app.exec_())
 
 
 #TODO: maybe include something like pdf.is_available() to check if latex is installed and can be used  (http://pythonhosted.org/latex/)
