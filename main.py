@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import sys, os
-from letter import Letter
+from letter.letter import Letter
 
 from letter_ui import Ui_MainWindow as gui
 

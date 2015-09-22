@@ -2,8 +2,6 @@ import sys, os
 from collections import OrderedDict
 from tempfile import TemporaryFile as tmp_file
 
-__version__ = 0.6
-
 try:
     from latex import build_pdf, LatexBuildError
 except ImportError:
