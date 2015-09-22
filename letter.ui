@@ -1,0 +1,806 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1100</width>
+    <height>880</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1100</width>
+    <height>880</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QGroupBox" name="attachment_listing_box">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>670</y>
+      <width>191</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Auflistungszeichen Anhang</string>
+    </property>
+    <widget class="QRadioButton" name="attachment_dot_radio">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>30</y>
+       <width>111</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Strich</string>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="attachment_dash_radio">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>60</y>
+       <width>111</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Punkt</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="date_form_box">
+    <property name="geometry">
+     <rect>
+      <x>890</x>
+      <y>580</y>
+      <width>111</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Anzeige Datum</string>
+    </property>
+    <widget class="QRadioButton" name="place_date_radio">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>30</y>
+       <width>111</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Ort, Datum</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="only_date_radio">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>60</y>
+       <width>111</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>nur Datum</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>660</y>
+      <width>255</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="markers_boxes_layout">
+     <item>
+      <widget class="QCheckBox" name="faltmarken_checkbox">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>Faltmarken</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="fenstermarken_checkbox">
+       <property name="text">
+        <string>Fenstermarken</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="lochermarke_checkbox">
+       <property name="text">
+        <string>Lochermarke</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="trennlinien_checkbox">
+       <property name="text">
+        <string>Trennlinien Briefkopf und Fußzeile</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>40</y>
+      <width>321</width>
+      <height>211</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="recipient_layout">
+     <item>
+      <widget class="QLabel" name="recipient_label">
+       <property name="text">
+        <string>Adresse Empfänger</string>
+       </property>
+       <property name="buddy">
+        <cstring>recipient_text</cstring>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPlainTextEdit" name="recipient_text"/>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_3">
+    <property name="geometry">
+     <rect>
+      <x>820</x>
+      <y>750</y>
+      <width>251</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="buttons_layout">
+     <item>
+      <widget class="QPushButton" name="create_button">
+       <property name="text">
+        <string>PDF erstellen</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="buttons_spacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="save_button">
+       <property name="text">
+        <string>Tex speichern</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_4">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>10</y>
+      <width>441</width>
+      <height>251</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="sender_layout">
+     <item>
+      <widget class="QLabel" name="sender_info_label">
+       <property name="text">
+        <string>Informationen Absender</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="sender_fields_layout">
+       <item>
+        <layout class="QVBoxLayout" name="sender_labels_layout">
+         <item>
+          <widget class="QLabel" name="name_label">
+           <property name="text">
+            <string>Name</string>
+           </property>
+           <property name="buddy">
+            <cstring>name_line</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="street_label">
+           <property name="text">
+            <string>Straße</string>
+           </property>
+           <property name="buddy">
+            <cstring>street_line</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="city_label">
+           <property name="text">
+            <string>PLZ Ort</string>
+           </property>
+           <property name="buddy">
+            <cstring>city_line</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="country_label">
+           <property name="text">
+            <string>Staat</string>
+           </property>
+           <property name="buddy">
+            <cstring>country_line</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="phone_label">
+           <property name="text">
+            <string>Telefon</string>
+           </property>
+           <property name="buddy">
+            <cstring>phone_line</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="email_label">
+           <property name="text">
+            <string>E-Mail</string>
+           </property>
+           <property name="buddy">
+            <cstring>email_line</cstring>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="sender_lines_layout">
+         <item>
+          <widget class="QLineEdit" name="name_line"/>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="street_line"/>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="city_line"/>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="country_line"/>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="phone_line"/>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="email_line"/>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_5">
+    <property name="geometry">
+     <rect>
+      <x>800</x>
+      <y>290</y>
+      <width>258</width>
+      <height>264</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="calendar_layout">
+     <item>
+      <widget class="QLabel" name="date_label">
+       <property name="text">
+        <string>Datum</string>
+       </property>
+       <property name="buddy">
+        <cstring>calendarWidget</cstring>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCalendarWidget" name="calendarWidget">
+       <property name="minimumDate">
+        <date>
+         <year>2015</year>
+         <month>8</month>
+         <day>20</day>
+        </date>
+       </property>
+       <property name="gridVisible">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_6">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>640</y>
+      <width>271</width>
+      <height>181</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="attachment_layout">
+     <item>
+      <widget class="QLabel" name="attachment_label">
+       <property name="text">
+        <string>Anhang</string>
+       </property>
+       <property name="buddy">
+        <cstring>attachment_text</cstring>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPlainTextEdit" name="attachment_text"/>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_7">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>270</y>
+      <width>761</width>
+      <height>361</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="letter_content_layout">
+     <item>
+      <layout class="QHBoxLayout" name="subject_layout">
+       <item>
+        <widget class="QLabel" name="subject_label">
+         <property name="text">
+          <string>Betreff</string>
+         </property>
+         <property name="buddy">
+          <cstring>subject_line</cstring>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="subject_line"/>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="salutation_layout">
+       <item>
+        <widget class="QLabel" name="salutation_label">
+         <property name="text">
+          <string>Anrede</string>
+         </property>
+         <property name="buddy">
+          <cstring>salutation_line</cstring>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="salutation_line"/>
+       </item>
+       <item>
+        <spacer name="salutation_spacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>78</width>
+           <height>28</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLabel" name="content_label">
+         <property name="text">
+          <string>Brieftext</string>
+         </property>
+         <property name="buddy">
+          <cstring>content_text</cstring>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPlainTextEdit" name="content_text"/>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="greeting_layout">
+         <item>
+          <widget class="QLabel" name="greeting_label">
+           <property name="text">
+            <string>Grußformel</string>
+           </property>
+           <property name="buddy">
+            <cstring>greeting_line</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="greeting_line"/>
+         </item>
+         <item>
+          <spacer name="greeting_spacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>78</width>
+             <height>28</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1100</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuEinstellungen">
+    <property name="title">
+     <string>Einstellungen</string>
+    </property>
+    <widget class="QMenu" name="menuWeitere_Angaben">
+     <property name="title">
+      <string>weitere Angaben ändern</string>
+     </property>
+     <addaction name="actionBankverbindung"/>
+    </widget>
+    <widget class="QMenu" name="menuMarkierungen">
+     <property name="title">
+      <string>Markierungen</string>
+     </property>
+     <addaction name="actionFaltmarken"/>
+     <addaction name="actionFenstermarken"/>
+     <addaction name="actionLochermarke"/>
+     <addaction name="actionTrennlinien"/>
+    </widget>
+    <addaction name="actionAnhang"/>
+    <addaction name="menuMarkierungen"/>
+    <addaction name="menuWeitere_Angaben"/>
+   </widget>
+   <addaction name="menuEinstellungen"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionBankverbindung">
+   <property name="text">
+    <string>Bankverbindung</string>
+   </property>
+  </action>
+  <action name="actionFaltmarken">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Faltmarken</string>
+   </property>
+  </action>
+  <action name="actionFenstermarken">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Fenstermarken</string>
+   </property>
+  </action>
+  <action name="actionLochermarke">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Lochermarke</string>
+   </property>
+  </action>
+  <action name="actionTrennlinien">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Trennlinien Briefkopf und Fußzeile</string>
+   </property>
+  </action>
+  <action name="actionAnhang">
+   <property name="text">
+    <string>Anhang</string>
+   </property>
+  </action>
+ </widget>
+ <tabstops>
+  <tabstop>name_line</tabstop>
+  <tabstop>street_line</tabstop>
+  <tabstop>city_line</tabstop>
+  <tabstop>country_line</tabstop>
+  <tabstop>phone_line</tabstop>
+  <tabstop>email_line</tabstop>
+  <tabstop>recipient_text</tabstop>
+  <tabstop>subject_line</tabstop>
+  <tabstop>salutation_line</tabstop>
+  <tabstop>content_text</tabstop>
+  <tabstop>greeting_line</tabstop>
+  <tabstop>calendarWidget</tabstop>
+  <tabstop>attachment_text</tabstop>
+  <tabstop>place_date_radio</tabstop>
+  <tabstop>only_date_radio</tabstop>
+  <tabstop>attachment_dot_radio</tabstop>
+  <tabstop>attachment_dash_radio</tabstop>
+  <tabstop>faltmarken_checkbox</tabstop>
+  <tabstop>fenstermarken_checkbox</tabstop>
+  <tabstop>lochermarke_checkbox</tabstop>
+  <tabstop>trennlinien_checkbox</tabstop>
+  <tabstop>create_button</tabstop>
+  <tabstop>save_button</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>actionFaltmarken</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>faltmarken_checkbox</receiver>
+   <slot>toggle()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>657</x>
+     <y>702</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionFenstermarken</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>fenstermarken_checkbox</receiver>
+   <slot>toggle()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>657</x>
+     <y>737</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionLochermarke</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>lochermarke_checkbox</receiver>
+   <slot>toggle()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>657</x>
+     <y>772</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionTrennlinien</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>trennlinien_checkbox</receiver>
+   <slot>toggle()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>657</x>
+     <y>807</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>faltmarken_checkbox</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>actionFaltmarken</receiver>
+   <slot>toggle()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>657</x>
+     <y>702</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fenstermarken_checkbox</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>actionFenstermarken</receiver>
+   <slot>toggle()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>657</x>
+     <y>737</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lochermarke_checkbox</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>actionLochermarke</receiver>
+   <slot>toggle()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>657</x>
+     <y>772</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>trennlinien_checkbox</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>actionTrennlinien</receiver>
+   <slot>toggle()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>657</x>
+     <y>807</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>create_button</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>statusbar</receiver>
+   <slot>clearMessage()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>861</x>
+     <y>802</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>868</x>
+     <y>867</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>save_button</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>statusbar</receiver>
+   <slot>clearMessage()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1023</x>
+     <y>803</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1004</x>
+     <y>870</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionBankverbindung</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>549</x>
+     <y>439</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
