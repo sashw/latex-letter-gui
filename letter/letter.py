@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import sys, os
 from collections import OrderedDict
 from tempfile import TemporaryFile as tmp_file
@@ -12,9 +14,9 @@ except ImportError:
 
 class Letter:
     def __init__(self):
-        self.tex = None
+        self.__tex = None
 
-        self.data = OrderedDict([
+        self.__data = OrderedDict([
             # allgemeine Einstellungen
             ('lochermarke', ['\lochermarke', True]),
             ('faltmarken', ['\\faltmarken', True]),
@@ -61,90 +63,90 @@ class Letter:
             ('text', ['text', []]),
             ])
 
-    def set_val(self, name, val, idx=1):
-        self.data[name][idx] = val
+    def _set_val(self, name, val, idx=1):
+        self.__data[name][idx] = val
 
     def set_lochermarke(self, val):
-        self.set_val('lochermarke', val)
+        self._set_val('lochermarke', val)
 
     def set_faltmarken(self, val):
-        self.set_val('faltmarken', val)
+        self._set_val('faltmarken', val)
 
     def set_fenstermarken(self, val):
-        self.set_val('fenstermarken', val)
+        self._set_val('fenstermarken', val)
 
     def set_trennlienen(self, val):
-        self.set_val('trennlienen', val)
+        self._set_val('trennlienen', val)
 
     def set_klassisch(self, val):
-        self.set_val('klassisch', val)
+        self._set_val('klassisch', val)
 
     def set_unserzeichen(self, val):
-        self.set_val('unserzeichen', val)
+        self._set_val('unserzeichen', val)
 
     def set_absender(self, name, strasse, ort, land='', zusatz='', retour=''):
-        self.set_val('name', name)
-        self.set_val('strasse', strasse)
-        self.set_val('ort', ort)
-        self.set_val('land', land)
-        self.set_val('zusatz', zusatz)
-        self.set_val('retouradresse', retour)
+        self._set_val('name', name)
+        self._set_val('strasse', strasse)
+        self._set_val('ort', ort)
+        self._set_val('land', land)
+        self._set_val('zusatz', zusatz)
+        self._set_val('retouradresse', retour)
 
     def set_ihrschreiben(self, datum):
-        self.set_val('ihrschreiben', datum)
+        self._set_val('ihrschreiben', datum)
 
     def set_zeichen(self, ihrzeichen, meinzeichen):
-        self.set_val('ihrzeichen', ihrzeichen)
-        self.set_val('meinzeichen', meinzeichen)
+        self._set_val('ihrzeichen', ihrzeichen)
+        self._set_val('meinzeichen', meinzeichen)
 
     def set_bank(self, bank, blz, konto):
-        self.set_val('bank', bank)
-        self.set_val('blz', blz)
-        self.set_val('konto', konto)
+        self._set_val('bank', bank)
+        self._set_val('blz', blz)
+        self._set_val('konto', konto)
 
     def set_tel(self, telefon, telefax='', telex=''):
-        self.set_val('telefon', telefon)
-        self.set_val('telefax', telefax)
-        self.set_val('telex', telex)
+        self._set_val('telefon', telefon)
+        self._set_val('telefax', telefax)
+        self._set_val('telex', telex)
 
     def set_mail(self, mail):
-        self.set_val('email', mail)
+        self._set_val('email', mail)
 
     def set_homepage(self, web):
-        self.set_val('http', web)
+        self._set_val('http', web)
 
     def set_vermerk(self, vermerk):
-        self.set_val('postvermerk', vermerk)
+        self._set_val('postvermerk', vermerk)
 
     def set_adresse(self, adresse):
-        self.set_val('adresse', adresse)
+        self._set_val('adresse', adresse)
 
     def set_betreff(self, betreff):
-        self.set_val('betreff', betreff)
+        self._set_val('betreff', betreff)
 
     def set_anrede(self, anrede):
-        self.set_val('anrede', anrede)
+        self._set_val('anrede', anrede)
 
     def set_gruss(self, gruss):
-        self.set_val('gruss', gruss)
+        self._set_val('gruss', gruss)
 
     def set_unterschrift(self, unterschrift):
-        self.set_val('unterschrift', unterschrift)
+        self._set_val('unterschrift', unterschrift)
 
     def set_anlagen(self, anlagen):
-        self.set_val('anlagen', anlagen)
+        self._set_val('anlagen', anlagen)
 
     def set_verteiler(self, verteiler):
-        self.set_val('verteiler', verteiler)
+        self._set_val('verteiler', verteiler)
 
     def set_text(self, text):
-        self.set_val('text', text)
+        self._set_val('text', text)
 
-    def create_tex(self):
-        if self.tex is not None:
-            self.tex.close()
+    def _create_tex(self):
+        if self.__tex is not None:
+            self.__tex.close()
 
-        self.tex = tmp_file()
+        self.__tex = tmp_file()
 
         preamble = ['\documentclass[11pt]{g-brief}\n',
                 '\\usepackage[utf8]{inputenc}\n',
@@ -153,13 +155,13 @@ class Letter:
                 '\\usepackage{gensymb}\n',
                 '\\usepackage{eurosym}\n\n']
 
-        self.tex.writelines(l.encode('utf-8') for l in preamble)
+        self.__tex.writelines(l.encode('utf-8') for l in preamble)
         #for line in preamble:
         #    self.tex.write(line.encode('utf-8'))
 
-        for values in self.data.values():
+        for values in self.__data.values():
             if type(values[1]) is list:
-                self.tex.writelines(line.encode('utf-8') for line in values[1])
+                self.__tex.writelines(line.encode('utf-8') for line in values[1])
             else:
                 line = ''
                 if type(values[1]) is bool:
@@ -172,14 +174,14 @@ class Letter:
                     if '\Gruss' in values[0]:
                         line += '{1cm}'
                 line += '\n'
-                self.tex.write(line.encode('utf-8'))
-        self.tex.write('\endinput'.encode('utf-8'))
+                self.__tex.write(line.encode('utf-8'))
+        self.__tex.write('\endinput'.encode('utf-8'))
 
     def save_tex(self, filename):
-        if not self.tex:
-            self.create_tex()
-        self.tex.seek(0)
-        lines = self.tex.readlines()
+        if not self.__tex:
+            self._create_tex()
+        self.__tex.seek(0)
+        lines = self.__tex.readlines()
         # check if the path exists, if not create the base directory
         basedir = os.path.dirname(filename)
         if basedir and not os.path.exists(basedir):
@@ -188,12 +190,12 @@ class Letter:
             f.writelines(line.decode('utf-8') for line in lines)
 
     def create_pdf(self, filename=''):
-        if not self.tex:
-            self.create_tex()
+        if not self.__tex:
+            self._create_tex()
         if not filename:
             filename = 'letter.pdf'
-        self.tex.seek(0)
-        pdf = build_pdf(self.tex.read().decode('utf-8'))
+        self.__tex.seek(0)
+        pdf = build_pdf(self.__tex.read().decode('utf-8'))
         pdf.save_to(filename)
 
     def replace_symbols_latex(self, text):
@@ -230,3 +232,4 @@ class Letter:
         for i, j in replace.items():
             text = text.replace(i, j)
         return text
+
