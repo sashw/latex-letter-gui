@@ -2,7 +2,7 @@ import sys, os
 from collections import OrderedDict
 from tempfile import TemporaryFile as tmp_file
 
-__version__ = 0.3
+__version__ = 0.4
 
 try:
     from latex import build_pdf, LatexBuildError
@@ -178,6 +178,18 @@ class Letter:
                 self.tex.write(line.encode('utf-8'))
         self.tex.write('\endinput'.encode('utf-8'))
 
+    def save_tex(self, filename):
+        if not self.tex:
+            self.create_tex()
+        self.tex.seek(0)
+        lines = self.tex.readlines()
+        # check if the path exists, if not create the base directory
+        basedir = os.path.dirname(filename)
+        if basedir and not os.path.exists(basedir):
+            os.makedirs(basedir)
+        with open(filename, 'w') as f:
+            f.writelines(line.decode('utf-8') for line in lines)
+
     def create_pdf(self, filename=''):
         if not self.tex:
             self.create_tex()
@@ -191,6 +203,7 @@ class Letter:
 letter = Letter()
 letter.set_absender("John Doe", "Straße der Freiheit", "Berlin")
 letter.set_text(["\n", "\\begin{document}\n", "\\begin{g-brief}\n", "Text bla blub.\n", "\end{g-brief}\n", "\end{document}\n"])
+letter.save_tex('test_out.tex')
 letter.create_pdf()
 sys.exit(0)
 
