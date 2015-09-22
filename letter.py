@@ -2,7 +2,7 @@ import sys, os
 from collections import OrderedDict
 from tempfile import TemporaryFile as tmp_file
 
-__version__ = 0.4
+__version__ = 0.5
 
 try:
     from latex import build_pdf, LatexBuildError
@@ -199,10 +199,48 @@ class Letter:
         pdf = build_pdf(self.tex.read().decode('utf-8'))
         pdf.save_to(filename)
 
+    def replace_symbols_latex(self, text):
+        replace = {
+                '%': '\%',
+                '$': '\$',
+                '{': '\{',
+                '}': '\}',
+                '_': '\_',
+                '&': '\&',
+                '#': '\#',
+                '§': '\S',
+                '€': '\euro',
+                '~': '\\textasciitilde',
+                '^': '\\textasciicircum',
+                '|': '\\textbar',
+                '°': '\degree',
+                '<': '\\textless',
+                '>': '\\textgreater',
+                '£': '\pounds',
+                '™': '\\texttrademark',
+                '©': '\copyright',
+                '®': '\\textregistered',
+                '†': '\dag',
+                '‡': '\ddag',
+                '¶': '\P',
+                '¿': '\\textquestiondown',
+                '¡': '\\textexclamdown'
+                }
+
+        # first replace all backslashes that this won't mess up already replaced symbols
+        text = text.replace('\\', '\\textbackslash')
+        # and now replace symbols which will mess up the latex compilation
+        for i, j in replace.items():
+            text = text.replace(i, j)
+        return text
+
+
 
 letter = Letter()
 letter.set_absender("John Doe", "Straße der Freiheit", "Berlin")
-letter.set_text(["\n", "\\begin{document}\n", "\\begin{g-brief}\n", "Text bla blub.\n", "\end{g-brief}\n", "\end{document}\n"])
+text = "This is a line with a lot of symbols in it: % & _ § € ~ ^ \ | £ ° ™ © ¡ äß?\n"
+text = letter.replace_symbols_latex(text)
+letter.set_text(["\n", "\\begin{document}\n", "\\begin{g-brief}\n", "Text bla blub.\n", text, "\end{g-brief}\n", "\end{document}\n"])
 letter.save_tex('test_out.tex')
 letter.create_pdf()
 sys.exit(0)
