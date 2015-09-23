@@ -85,8 +85,8 @@ class Letter:
     def set_fenstermarken(self, val):
         self._set_val('fenstermarken', val)
 
-    def set_trennlienen(self, val):
-        self._set_val('trennlienen', val)
+    def set_trennlinien(self, val):
+        self._set_val('trennlinien', val)
 
     def set_klassisch(self, val):
         self._set_val('klassisch', val)
