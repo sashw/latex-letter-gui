@@ -9,8 +9,7 @@ Tests for `letter` module.
 """
 
 import unittest
-from os import remove as rm
-from os import getcwd as pwd
+import shutil, tempfile
 from os.path import join as pjoin
 
 from letter.letter import Letter
@@ -19,9 +18,9 @@ from letter.letter import Letter
 class TestLetter(unittest.TestCase):
 
     def setUp(self):
-        self.pwd = pwd()
-        self.tex = pjoin(self.pwd, 'test_out.tex')
-        self.pdf = pjoin(self.pwd, 'test_out.pdf')
+        self.test_dir = tempfile.mkdtemp()
+        self.tex = pjoin(self.test_dir, 'test_out.tex')
+        self.pdf = pjoin(self.test_dir, 'test_out.pdf')
         self.letter = Letter()
         self.letter.set_absender("John Doe", "Straße der Freiheit", "Berlin")
         text = "This is a line with a lot of symbols in it: % & _ § € ~ ^ \ | £ ° ™ © ¡ äß?\\\n"
@@ -38,8 +37,7 @@ class TestLetter(unittest.TestCase):
 
     def tearDown(self):
         self.letter.__exit__()
-        rm(self.tex)
-        rm(self.pdf)
+        shutil.rmtree(self.test_dir)
 
 if __name__ == '__main__':
     unittest.main()
