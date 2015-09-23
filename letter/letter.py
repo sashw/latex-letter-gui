@@ -131,6 +131,9 @@ class Letter:
     def set_adresse(self, adresse):
         self._set_val('adresse', adresse)
 
+    def set_datum(self, datum):
+        self._set_val('datum', datum)
+
     def set_betreff(self, betreff):
         self._set_val('betreff', betreff)
 
