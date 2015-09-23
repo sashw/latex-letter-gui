@@ -8,13 +8,13 @@ from letter_ui import Ui_MainWindow as gui
 
 #TODO: save/create button filedialog öffnen http://doc.qt.io/qt-5/qfiledialog.html
 
-letter = Letter()
-letter.set_absender("John Doe", "Straße der Freiheit", "Berlin")
-text = "This is a line with a lot of symbols in it: % & _ § € ~ ^ \ | £ ° ™ © ¡ äß?\\\n"
-text = letter.replace_symbols_latex(text)
-letter.set_text(["\n", "\\begin{document}\n", "\\begin{g-brief}\n", "Text bla blub.\n", text, "\end{g-brief}\n", "\end{document}\n"])
-letter.save_tex('test_out.tex')
-letter.create_pdf()
+with Letter() as letter:
+    letter.set_absender("John Doe", "Straße der Freiheit", "Berlin")
+    text = "This is a line with a lot of symbols in it: % & _ § € ~ ^ \ | £ ° ™ © ¡ äß?\\\n"
+    text = letter.replace_symbols_latex(text)
+    letter.set_text(["\n", "\\begin{document}\n", "\\begin{g-brief}\n", "Text bla blub.\n", text, "\end{g-brief}\n", "\end{document}\n"])
+    letter.save_tex('test_out.tex')
+    letter.create_pdf()
 sys.exit(0)
 
 

@@ -63,6 +63,16 @@ class Letter:
             ('text', ['text', []]),
             ])
 
+    # Define __enter__ and __exit__ methods to use Letter with the 'with' statement
+    # as a context manager. Use exit to only close the temporary file, no exception
+    # handling (if exc_stuff is not None), therefore return nothing like True
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type=None, exc_value=None, traceback=None):
+        if self.__tex:
+            self.__tex.close()  # close temp file to delete it
+
     def _set_val(self, name, val, idx=1):
         self.__data[name][idx] = val
 
