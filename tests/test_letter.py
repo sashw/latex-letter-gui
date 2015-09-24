@@ -53,6 +53,13 @@ class TestLetter(unittest.TestCase):
             ret = letter._update_tex()
         self.assertIsNone(ret)
 
+    def test_create_make_conditions(self):
+        from letter.letter import Letter
+        letter = Letter()
+        letter._make_tex()
+        letter._create_tex()
+        letter.__exit__()
+
     def test_tex(self):
         from letter.letter import Letter
         with Letter() as letter:
@@ -66,6 +73,17 @@ class TestLetter(unittest.TestCase):
             letter.set_text(["\n", "\\begin{document}\n", "\\begin{g-brief}\n", "Content.\n", "\end{g-brief}\n", "\end{document}\n"])
             ret = letter.create_pdf(self.pdf)
         self.assertIsNone(ret)
+
+    def test_tex_pdf_without_filename(self):
+        from letter.letter import Letter
+        with Letter() as letter:
+            letter.set_text(["\\begin{document}\n", "\\begin{g-brief}\n", "\end{g-brief}\n", "\end{document}\n"])
+            tex = letter.save_tex()
+            pdf = letter.create_pdf()
+        self.assertEqual(tex, pdf)
+        from os.path import isfile
+        self.assertTrue(isfile('letter.tex'))
+        self.assertTrue(isfile('letter.pdf'))
 
     def test_pdf_fail(self):
         from letter.letter import Letter
