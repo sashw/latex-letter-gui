@@ -67,11 +67,14 @@ class Letter:
     # as a context manager. Use exit to only close the temporary file, no exception
     # handling (if exc_stuff is not None), therefore return nothing like True
     def __enter__(self):
+        if not self.__tex:
+            self._create_tex()
         return self
 
     def __exit__(self, exc_type=None, exc_value=None, traceback=None):
         if self.__tex:
             self.__tex.close()  # close temp file to delete it
+            self.__tex = None
 
     def _set_val(self, name, val, idx=1):
         self.__data[name][idx] = val
@@ -156,10 +159,15 @@ class Letter:
         self._set_val('text', text)
 
     def _create_tex(self):
-        if self.__tex is not None:
+        if self.__tex:
             self.__tex.close()
+            self.__tex = None
 
         self.__tex = tmp_file()
+
+    def _update_tex(self):
+        if not self.__tex:
+            self._create_tex()
 
         preamble = ['\documentclass[11pt]{g-brief}\n',
                 '\\usepackage[utf8]{inputenc}\n',
@@ -190,9 +198,17 @@ class Letter:
                 self.__tex.write(line.encode('utf-8'))
         self.__tex.write('\endinput'.encode('utf-8'))
 
-    def save_tex(self, filename):
+    def _make_tex(self):
         if not self.__tex:
             self._create_tex()
+        else:
+            self._update_tex()
+
+    def save_tex(self, filename=''):
+        self._make_tex()
+        if not filename:
+            filename = 'letter.tex'
+
         self.__tex.seek(0)
         lines = self.__tex.readlines()
         # check if the path exists, if not create the base directory
@@ -203,13 +219,22 @@ class Letter:
             f.writelines(line.decode('utf-8') for line in lines)
 
     def create_pdf(self, filename=''):
-        if not self.__tex:
-            self._create_tex()
+        self._make_tex()
         if not filename:
             filename = 'letter.pdf'
+
         self.__tex.seek(0)
-        pdf = build_pdf(self.__tex.read().decode('utf-8'))
-        pdf.save_to(filename)
+        try:
+            pdf = build_pdf(self.__tex.read().decode('utf-8'))
+            pdf.save_to(filename)
+        except LatexBuildError as e:
+            for error in e.get_errors():
+                print(u'Error in {0[filename]}, line {0[line]}: {0[error]}'.format(error))
+                # also print one line of context
+                print(u'    {}'.format(error['context'][1]))
+                print()
+            self.__tex.close()
+            sys.exit("Building PDF failed!")
 
     def replace_symbols_latex(self, text):
         replace = {
