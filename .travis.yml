@@ -12,5 +12,10 @@ install:
   - sudo apt-get install texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
   - pip install -r requirements.txt
 
+before_install:
+  - pip install codecov
+
 # command to run tests, e.g. python setup.py test
-script: nosetests
+script: nosetests --with-coverage --cover-package letter
+
+after_success: codecov
