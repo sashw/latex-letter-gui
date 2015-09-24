@@ -46,19 +46,34 @@ class TestLetter(unittest.TestCase):
         with Letter() as letter:
             pass
 
+    def test_update_empty(self):
+        from letter.letter import Letter
+        with Letter() as letter:
+            letter.__exit__()
+            ret = letter._update_tex()
+        self.assertIsNone(ret)
+
     def test_tex(self):
         from letter.letter import Letter
-        letter = Letter()
-        letter.set_text(["\n", "\\begin{document}\n", "\\begin{g-brief}\n", "Content.\n", "\end{g-brief}\n", "\end{document}\n"])
-        ret = letter.save_tex(self.tex)
+        with Letter() as letter:
+            letter.set_text(["\n", "\\begin{document}\n", "\\begin{g-brief}\n", "Content.\n", "\end{g-brief}\n", "\end{document}\n"])
+            ret = letter.save_tex(self.tex)
         self.assertIsNone(ret)
 
     def test_pdf(self):
         from letter.letter import Letter
-        letter = Letter()
-        letter.set_text(["\n", "\\begin{document}\n", "\\begin{g-brief}\n", "Content.\n", "\end{g-brief}\n", "\end{document}\n"])
-        ret = letter.create_pdf(self.pdf)
+        with Letter() as letter:
+            letter.set_text(["\n", "\\begin{document}\n", "\\begin{g-brief}\n", "Content.\n", "\end{g-brief}\n", "\end{document}\n"])
+            ret = letter.create_pdf(self.pdf)
         self.assertIsNone(ret)
+
+    def test_pdf_fail(self):
+        from letter.letter import Letter
+        with Letter() as letter:
+            letter.set_text(["\\begin{document}\n", "\\begin{g-brief}\n", "\end{g-brief}\n"])
+            with self.assertRaises(SystemExit) as exc:
+                letter.create_pdf(self.pdf)
+            self.assertEqual(exc.exception.code, 'Building PDF failed!')
 
     def test_setters(self):
         from letter.letter import Letter
@@ -88,6 +103,7 @@ class TestLetter(unittest.TestCase):
         text = "This is a line with a lot of symbols in it: % & _ § € ~ ^ \ | £ ° ™ © ¡ äß?\n"
         text = letter.replace_symbols_latex(text)
         letter.set_text(["\n", "\\begin{document}\n", "\\begin{g-brief}\n", "Text bla blub.\\\\\n", text, "\end{g-brief}\n", "\end{document}\n"])
+        letter.__exit__()
 
     @classmethod
     def tearDownClass(cls):
