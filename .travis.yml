@@ -7,13 +7,22 @@ python:
   - "3.4"
   - "3.5"
 
+sudo: false
+
+addons:
+  apt:
+    packages:
+    - texlive-latex-recommended
+    - texlive-latex-extra
+    - texlive-fonts-recommended
+
+before_install:
+  - pip install codecov
+  - pip install coveralls
+
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 install:
-  - sudo apt-get install texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
   - pip install -r requirements.txt
-
-  - pip install coveralls
-  - pip install codecov
 
 # command to run tests, e.g. python setup.py test
 script: nosetests --with-coverage --cover-package letter
