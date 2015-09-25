@@ -14,7 +14,23 @@ Latex Letter GUI
     :target: http://codecov.io/github/sashw/latex-letter-gui?branch=master
     :alt: Code Coverage Codecov
 
+.. image:: https://img.shields.io/badge/license-GPLv3-blue.svg
+    :target: https://www.gnu.org/licenses/gpl-3.0.en.html
+    :alt: License GPLv3
+
 This program provides an easy to use GUI using Qt5 Python bindings in order to create letters with Latex.
 Therefore a Letter class is provided which handles the content of the letter as well as creates tex and PDF files.
 
-* Licensed under the `GNU General Public License v3.0 <https://www.gnu.org/licenses/gpl-3.0.en.html>`_.
+
+Requirements
+------------
+
+You need to have the Python3 Qt5 bindings installed, ``python-pyqt5`` or ``python3-pyqt5`` depending on your Linux distribution.
+
+On Ubuntu, you can install it with
+``sudo apt-get install python3-pyqt5``
+
+License
+-------
+
+This project is licensed under the `GNU General Public License v3.0 <https://www.gnu.org/licenses/gpl-3.0.en.html>`_.
