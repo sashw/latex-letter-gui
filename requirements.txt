@@ -1,1 +1,2 @@
-latex
+latex>=0.6
+nose-cov
