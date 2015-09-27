@@ -100,11 +100,22 @@ class TestLetter(unittest.TestCase):
                 letter.create_pdf(self.pdf)
             self.assertEqual(exc.exception.code, 'Building PDF failed!')
 
-    def test_setters(self):
+    def test_symbol_replace(self):
+        from letter.letter import Letter
+        with Letter() as letter:
+            text = "Lots of symbols: %& _d§ €a~rt^4 \| £ö°o™ß© ¡?"
+            replaced = letter.replace_symbols_latex(text)
+            self.assertEqual(replaced,
+                    'Lots of symbols: \%\& \_d\S  \euro a\\textasciitilde rt\\textasciicircum 4 \\textbackslash \\textbar  \pounds ö\degree o\\texttrademark ß\copyright  \\textexclamdown ?')
+
+    def test_setters_and_getters(self):
         from letter.letter import Letter
         letter = Letter()
         letter.set_absender("John Doe", "Straße der Freiheit", "Berlin")
+        absender = letter.get_absender()
+        self.assertEqual(("John Doe", "Straße der Freiheit", "Berlin", "", "", ""), absender)
         letter.set_adresse("Klaus Störtebeker\\\\Hamburg")
+        self.assertEqual("Klaus Störtebeker\\\\Hamburg", letter.get_adresse())
         letter.set_lochermarke(True)
         letter.set_faltmarken(True)
         letter.set_fenstermarken(True)
@@ -112,22 +123,39 @@ class TestLetter(unittest.TestCase):
         letter.set_klassisch(False)
         letter.set_unserzeichen(False)
         letter.set_ihrschreiben("1.1.1970")
+        self.assertEqual("1.1.1970", letter.get_ihrschreiben())
         letter.set_zeichen("abc", "xyz")
-        letter.set_bank("Top Bank", 12345678, "0123456789")
+        self.assertEqual(("abc", "xyz"), letter.get_zeichen())
+        bank = ("Top Bank", 12345678, "0123456789")
+        letter.set_bank(*bank)
+        get_bank = letter.get_bank()
+        self.assertEqual(bank, get_bank)
         letter.set_tel("+00 12345 67890567")
+        self.assertEqual(("+00 12345 67890567", '', ''), letter.get_tel())
         letter.set_mail("me@mail.tld")
+        self.assertEqual("me@mail.tld", letter.get_mail())
         letter.set_homepage("http://domain.tld")
+        self.assertEqual("http://domain.tld", letter.get_homepage())
         letter.set_vermerk("")
+        self.assertEqual("", letter.get_vermerk())
         letter.set_datum("21.12.2012")
+        self.assertEqual("21.12.2012", letter.get_datum())
         letter.set_betreff("Superwichtige Mitteilung")
+        self.assertEqual("Superwichtige Mitteilung", letter.get_betreff())
         letter.set_anrede("Hallo")
+        self.assertEqual("Hallo", letter.get_anrede())
         letter.set_gruss("Gruß")
+        self.assertEqual("Gruß", letter.get_gruss())
         letter.set_unterschrift("John Doe")
+        self.assertEqual("John Doe", letter.get_unterschrift())
         letter.set_anlagen("")
+        self.assertEqual("", letter.get_anlagen())
         letter.set_verteiler("")
+        self.assertEqual("", letter.get_verteiler())
         text = "This is a line with a lot of symbols in it: % & _ § € ~ ^ \ | £ ° ™ © ¡ äß?\n"
         text = letter.replace_symbols_latex(text)
         letter.set_text(["\n", "\\begin{document}\n", "\\begin{g-brief}\n", "Text bla blub.\\\\\n", text, "\end{g-brief}\n", "\end{document}\n"])
+        self.assertEqual(["\n", "\\begin{document}\n", "\\begin{g-brief}\n", "Text bla blub.\\\\\n", text, "\end{g-brief}\n", "\end{document}\n"], letter.get_text())
         letter.__exit__()
 
     @classmethod
