@@ -85,7 +85,14 @@ class TestLetter(unittest.TestCase):
         self.assertTrue(isfile('letter.tex'))
         self.assertTrue(isfile('letter.pdf'))
 
-    def test_pdf_fail(self):
+    def test_pdf_fail_missing_begin_document(self):
+        from letter.letter import Letter
+        with Letter() as letter:
+            with self.assertRaises(SystemExit) as exc:
+                letter.create_pdf(self.pdf)
+            self.assertEqual(exc.exception.code, 'Building PDF failed!')
+
+    def test_pdf_fail_syntax(self):
         from letter.letter import Letter
         with Letter() as letter:
             letter.set_text(["\\begin{document}\n", "\\begin{g-brief}\n", "\end{g-brief}\n"])
