@@ -169,6 +169,10 @@ class Letter:
         if not self.__tex:
             self._create_tex()
 
+        # delete the content of the temporary file
+        self.__tex.seek(0)
+        self.__tex.truncate()
+
         preamble = ['\documentclass[11pt]{g-brief}\n',
                 '\\usepackage[utf8]{inputenc}\n',
                 '\\usepackage[ngerman]{babel}\n',
