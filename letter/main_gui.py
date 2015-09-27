@@ -276,7 +276,7 @@ class Ui_MainWindow(object):
         self.trennlinien_checkbox.clicked['bool'].connect(self.actionTrennlinien.toggle)
         self.create_button.clicked['bool'].connect(self.statusbar.clearMessage)
         self.save_button.clicked['bool'].connect(self.statusbar.clearMessage)
-        self.actionBankverbindung.triggered['bool'].connect(MainWindow.show)
+        self.actionBankverbindung.triggered['bool'].connect(MainWindow.showBank)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         MainWindow.setTabOrder(self.name_line, self.street_line)
         MainWindow.setTabOrder(self.street_line, self.city_line)
