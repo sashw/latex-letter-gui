@@ -186,7 +186,13 @@ class Letter:
 
         for values in self.__data.values():
             if type(values[1]) is list:
-                self.__tex.writelines(line.encode('utf-8') for line in values[1])
+                if 'text' in values[0]:
+                    self.__tex.writelines(line.encode('utf-8') for line in values[1])
+                else:
+                    line = '%s{\n' % values[0]
+                    self.__tex.write(line.encode('utf-8'))
+                    self.__tex.writelines(line.encode('utf-8') for line in values[1])
+                    self.__tex.write('}\n'.encode('utf-8'))
             else:
                 line = ''
                 if type(values[1]) is bool:
@@ -249,27 +255,27 @@ class Letter:
                 '_': '\_',
                 '&': '\&',
                 '#': '\#',
-                '§': '\S',
-                '€': '\euro',
-                '~': '\\textasciitilde',
-                '^': '\\textasciicircum',
-                '|': '\\textbar',
-                '°': '\degree',
-                '<': '\\textless',
-                '>': '\\textgreater',
-                '£': '\pounds',
-                '™': '\\texttrademark',
-                '©': '\copyright',
-                '®': '\\textregistered',
-                '†': '\dag',
-                '‡': '\ddag',
-                '¶': '\P',
-                '¿': '\\textquestiondown',
-                '¡': '\\textexclamdown'
+                '§': '\S ',
+                '€': '\euro ',
+                '~': '\\textasciitilde ',
+                '^': '\\textasciicircum ',
+                '|': '\\textbar ',
+                '°': '\degree ',
+                '<': '\\textless ',
+                '>': '\\textgreater ',
+                '£': '\pounds ',
+                '™': '\\texttrademark ',
+                '©': '\copyright ',
+                '®': '\\textregistered ',
+                '†': '\dag ',
+                '‡': '\ddag ',
+                '¶': '\P ',
+                '¿': '\\textquestiondown ',
+                '¡': '\\textexclamdown '
                 }
 
         # first replace all backslashes that this won't mess up already replaced symbols
-        text = text.replace('\\', '\\textbackslash')
+        text = text.replace('\\', '\\textbackslash ')
         # and now replace symbols which will mess up the latex compilation
         for i, j in replace.items():
             text = text.replace(i, j)
