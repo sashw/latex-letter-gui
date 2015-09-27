@@ -8,16 +8,16 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class Ui_Dialog(object):
-    def setupUi(self, Dialog):
-        Dialog.setObjectName("Dialog")
-        Dialog.resize(352, 250)
-        self.buttonBox = QtWidgets.QDialogButtonBox(Dialog)
+class Ui_BankDialog(object):
+    def setupUi(self, BankDialog):
+        BankDialog.setObjectName("BankDialog")
+        BankDialog.resize(352, 250)
+        self.buttonBox = QtWidgets.QDialogButtonBox(BankDialog)
         self.buttonBox.setGeometry(QtCore.QRect(70, 190, 251, 32))
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
-        self.horizontalLayoutWidget = QtWidgets.QWidget(Dialog)
+        self.horizontalLayoutWidget = QtWidgets.QWidget(BankDialog)
         self.horizontalLayoutWidget.setGeometry(QtCore.QRect(30, 40, 291, 121))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
         self.layout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
@@ -50,15 +50,15 @@ class Ui_Dialog(object):
         self.bank_code_label.setBuddy(self.bank_code_line)
         self.account_label.setBuddy(self.account_line)
 
-        self.retranslateUi(Dialog)
-        self.buttonBox.accepted.connect(Dialog.accept)
-        self.buttonBox.rejected.connect(Dialog.reject)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
+        self.retranslateUi(BankDialog)
+        self.buttonBox.accepted.connect(BankDialog.accept)
+        self.buttonBox.rejected.connect(BankDialog.reject)
+        QtCore.QMetaObject.connectSlotsByName(BankDialog)
 
-    def retranslateUi(self, Dialog):
+    def retranslateUi(self, BankDialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.bank_name_label.setText(_translate("Dialog", "Bank"))
-        self.bank_code_label.setText(_translate("Dialog", "BLZ"))
-        self.account_label.setText(_translate("Dialog", "Konto"))
+        BankDialog.setWindowTitle(_translate("BankDialog", "BankDialog"))
+        self.bank_name_label.setText(_translate("BankDialog", "Bank"))
+        self.bank_code_label.setText(_translate("BankDialog", "BLZ"))
+        self.account_label.setText(_translate("BankDialog", "Konto"))
 
