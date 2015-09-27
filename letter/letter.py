@@ -79,6 +79,9 @@ class Letter:
     def _set_val(self, name, val, idx=1):
         self.__data[name][idx] = val
 
+    def _get_val(self, name, idx=1):
+        return self.__data[name][idx]
+
     def set_lochermarke(self, val):
         self._set_val('lochermarke', val)
 
@@ -97,66 +100,189 @@ class Letter:
     def set_unserzeichen(self, val):
         self._set_val('unserzeichen', val)
 
-    def set_absender(self, name, strasse, ort, land='', zusatz='', retour=''):
+    def set_name(self, name):
         self._set_val('name', name)
+
+    def set_strasse(self, strasse):
         self._set_val('strasse', strasse)
+
+    def set_ort(self, ort):
         self._set_val('ort', ort)
+
+    def set_land(self, land):
         self._set_val('land', land)
+
+    def set_zusatz(self, zusatz):
         self._set_val('zusatz', zusatz)
+
+    def set_retour(self, retour):
         self._set_val('retouradresse', retour)
+
+    def set_absender(self, name, strasse, ort, land='', zusatz='', retour=''):
+        self.set_name(name)
+        self.set_strasse(strasse)
+        self.set_ort(ort)
+        self.set_land(land)
+        self.set_zusatz(zusatz)
+        self.set_retour(retour)
+
+    def get_name(self):
+        return self._get_val('name')
+
+    def get_stasse(self):
+        return self._get_val('strasse')
+
+    def get_ort(self):
+        return self._get_val('ort')
+
+    def get_land(self):
+        return self._get_val('land')
+
+    def get_zusatz(self):
+        return self._get_val('zusatz')
+
+    def get_retour(self):
+        return self._get_val('retouradresse')
+
+    def get_absender(self):
+        return (self.get_name(), self.get_stasse(), self.get_ort(), self.get_land(), self.get_zusatz(), self.get_retour())
 
     def set_ihrschreiben(self, datum):
         self._set_val('ihrschreiben', datum)
+
+    def get_ihrschreiben(self):
+        return self._get_val('ihrschreiben')
 
     def set_zeichen(self, ihrzeichen, meinzeichen):
         self._set_val('ihrzeichen', ihrzeichen)
         self._set_val('meinzeichen', meinzeichen)
 
-    def set_bank(self, bank, blz, konto):
+    def get_zeichen(self):
+        return (self._get_val('ihrzeichen'), self._get_val('meinzeichen'))
+
+    def set_bank_name(self, bank):
         self._set_val('bank', bank)
+
+    def set_blz(self, blz):
         self._set_val('blz', blz)
+
+    def set_konto(self, konto):
         self._set_val('konto', konto)
 
-    def set_tel(self, telefon, telefax='', telex=''):
+    def set_bank(self, bank, blz, konto):
+        self.set_bank_name(bank)
+        self.set_blz(blz)
+        self.set_konto(konto)
+
+    def get_bank_name(self):
+        return self._get_val('bank')
+
+    def get_blz(self):
+        return self._get_val('blz')
+
+    def get_konto(self):
+        return self._get_val('konto')
+
+    def get_bank(self):
+        return (self.get_bank_name(), self.get_blz(), self.get_konto())
+
+    def set_phone(self, telefon):
         self._set_val('telefon', telefon)
-        self._set_val('telefax', telefax)
+
+    def set_fax(self, fax):
+        self._set_val('telefax', fax)
+
+    def set_telex(self, telex):
         self._set_val('telex', telex)
+
+    def set_tel(self, telefon, telefax='', telex=''):
+        self.set_phone(telefon)
+        self.set_fax(telefax)
+        self.set_telex(telex)
+
+    def get_phone(self):
+        return self._get_val('telefon')
+
+    def get_fax(self):
+        return self._get_val('telefax')
+
+    def get_telex(self):
+        return self._get_val('telex')
+
+    def get_tel(self):
+        return (self.get_phone(), self.get_fax(), self.get_telex())
 
     def set_mail(self, mail):
         self._set_val('email', mail)
 
+    def get_mail(self):
+        return self._get_val('email')
+
     def set_homepage(self, web):
         self._set_val('http', web)
+
+    def get_homepage(self):
+        return self._get_val('http')
 
     def set_vermerk(self, vermerk):
         self._set_val('postvermerk', vermerk)
 
+    def get_vermerk(self):
+        return self._get_val('postvermerk')
+
     def set_adresse(self, adresse):
         self._set_val('adresse', adresse)
+
+    def get_adresse(self):
+        return self._get_val('adresse')
 
     def set_datum(self, datum):
         self._set_val('datum', datum)
 
+    def get_datum(self):
+        return self._get_val('datum')
+
     def set_betreff(self, betreff):
         self._set_val('betreff', betreff)
+
+    def get_betreff(self):
+        return self._get_val('betreff')
 
     def set_anrede(self, anrede):
         self._set_val('anrede', anrede)
 
+    def get_anrede(self):
+        return self._get_val('anrede')
+
     def set_gruss(self, gruss):
         self._set_val('gruss', gruss)
+
+    def get_gruss(self):
+        return self._get_val('gruss')
 
     def set_unterschrift(self, unterschrift):
         self._set_val('unterschrift', unterschrift)
 
+    def get_unterschrift(self):
+        return self._get_val('unterschrift')
+
     def set_anlagen(self, anlagen):
         self._set_val('anlagen', anlagen)
+
+    def get_anlagen(self):
+        return self._get_val('anlagen')
 
     def set_verteiler(self, verteiler):
         self._set_val('verteiler', verteiler)
 
+    def get_verteiler(self):
+        return self._get_val('verteiler')
+
     def set_text(self, text):
         self._set_val('text', text)
+
+    def get_text(self):
+        return self._get_val('text')
 
     def _create_tex(self):
         if self.__tex:
