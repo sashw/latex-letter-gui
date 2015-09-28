@@ -25,10 +25,16 @@ Therefore a Letter class is provided which handles the content of the letter as 
 Requirements
 ------------
 
+In order to create PDF files, you need to have a Tex distribution like TeX Live installed.
+
 You need to have the Python3 Qt5 bindings installed, ``python-pyqt5`` or ``python3-pyqt5`` depending on your Linux distribution.
 
 On Ubuntu, you can install it with
 ``sudo apt-get install python3-pyqt5``
+
+Windows
+^^^^^^^
+If you're running Windows, make sure to install a Tex distribution like TeX Live or MikTeX as well as PyQt5 for your installed Python version. PyQt5 can be downloaded `here <https://riverbankcomputing.com/software/pyqt/download5>`_.
 
 License
 -------
