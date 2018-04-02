@@ -114,7 +114,7 @@ class MainWindow(QMainWindow, gui):
             self.letter.set_datum(date)
         else:
             city = city.partition(' ')[2]
-            self.letter.set_datum('%s, %s' % (date, city))
+            self.letter.set_datum('%s, %s' % (city, date))
 
         return missing
 
