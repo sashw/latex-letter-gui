@@ -53,6 +53,19 @@ class MainWindow(QMainWindow, gui):
         text += ['\end{g-brief}\n', '\end{document}\n']
         return text
 
+    def __prepare_attachment(self, raw, label):
+        raw = raw.split('\n')
+        label_cmd = '\\renewcommand{\labelitemi}{%s}\n' % label
+        text = [label_cmd, '\\vspace{1em} \\textbf{Anlagen:} \\begin{itemize}\n']
+        for line in raw:
+            line = self.__prepare_line(line)
+            if not line.strip():
+                continue
+            line = '    \item %s\n' % line
+            text.append(line)
+        text.append('\end{itemize}\n')
+        return text
+
     def __collect_values(self):
         missing = []
 
@@ -115,6 +128,17 @@ class MainWindow(QMainWindow, gui):
         else:
             city = city.partition(' ')[2]
             self.letter.set_datum('%s, %s' % (city, date))
+
+        attachment = self.attachment_text.toPlainText()
+        label = ''
+        if self.attachment_dash_radio.isChecked():
+            label = '--'
+        elif self.attachment_dot_radio.isChecked():
+            label = '$\cdot$'
+        else:  # default; shouldn't be used since one radio button has to be selected
+            label = '$\bullet$'
+        if attachment:
+            self.letter.set_anlagen(self.__prepare_attachment(attachment, label))
 
         return missing
 
