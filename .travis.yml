@@ -16,6 +16,7 @@ addons:
     - texlive-latex-recommended
     - texlive-latex-extra
     - texlive-fonts-recommended
+    - texlive-lang-german
     - python3-pyqt5
 
 before_install:
