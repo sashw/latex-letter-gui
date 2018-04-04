@@ -305,8 +305,8 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.attachment_listing_box.setTitle(_translate("MainWindow", "Auflistungszeichen Anhang"))
-        self.attachment_dot_radio.setText(_translate("MainWindow", "Strich"))
-        self.attachment_dash_radio.setText(_translate("MainWindow", "Punkt"))
+        self.attachment_dot_radio.setText(_translate("MainWindow", "Punkt"))
+        self.attachment_dash_radio.setText(_translate("MainWindow", "Strich"))
         self.date_form_box.setTitle(_translate("MainWindow", "Anzeige Datum"))
         self.place_date_radio.setText(_translate("MainWindow", "Ort, Datum"))
         self.only_date_radio.setText(_translate("MainWindow", "nur Datum"))
